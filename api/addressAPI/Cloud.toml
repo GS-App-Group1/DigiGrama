@@ -1,13 +1,13 @@
 [container.image]
-repository = "chathurag"
-name="Police API"
+repository="chathurag"
+name="DigiGrama"
 tag="0.1.0"
 
 [[cloud.config.files]]
-file = "./Configs.toml"
+file="./Configs.toml"
 
 [[cloud.config.secrets]]
-file = "./Secrets.toml"
+file="../config/Secrets.toml"
 
 [cloud.deployment]
 min_memory="512Mi"
@@ -22,9 +22,9 @@ cpu=70
 memory=80
 
 [cloud.deployment.probes.liveness]
-port = 9090
-path = "/api/policeCheck/liveness"
+port=9090
+path="/address/liveness"
 
 [cloud.deployment.probes.readiness]
-port = 9090
-path = "/api/policeCheck/readiness"
+port=9090
+path="/address/readiness"
