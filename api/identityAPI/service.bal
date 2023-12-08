@@ -1,17 +1,51 @@
 import ballerina/http;
+import ballerinax/mongodb;
+
+type Identity record {|
+    int nic?;
+    string name;
+    int age;
+    boolean isMarried;
+    boolean isEmployed;
+|};
+
+# Configurations for the MongoDB endpoint
+configurable string username = ?;
+configurable string password = ?;
+configurable string database = ?;
+configurable string collection = ?;
 
 # A service representing a network-accessible API
 # bound to port `9090`.
-service / on new http:Listener(9090) {
+service /identity on new http:Listener(9090) {
+    final mongodb:Client databaseClient;
 
-    # A resource for generating greetings
-    # + name - the input string name
-    # + return - string name with hello message or error
-    resource function get greeting(string name) returns string|error {
-        // Send a response back to the caller.
-        if name is "" {
-            return error("name should not be empty!");
-        }
-        return "Hello, " + name;
+    public function init() returns error? {
+        self.databaseClient = check new ({connection: {url: string `mongodb+srv://${username}:${password}@digigrama.pgauwpq.mongodb.net/`}});
+    }
+
+    # A resource for getting the Identity of a person
+    # + return - Identity or error
+    resource function get .() returns Identity[]|error {
+        stream<Identity, error?>|mongodb:Error IdentityStream = check self.databaseClient->find(collection, database);
+        return from Identity Identity in check IdentityStream
+            select Identity;
+    }
+
+    # A resource for getting the Identity of a given nic
+    # + nic - NIC of the person
+    # + return - Identity or error
+    resource function get getIdentityFromNIC(int nic) returns Identity[]|error {
+        stream<Identity, error?>|mongodb:Error IdentityStream = check self.databaseClient->find(collection, database, {nic: nic});
+        return from Identity Identity in check IdentityStream
+            select Identity;
+    }
+    resource function get liveness() returns http:Ok {
+        return http:OK;
+    }
+
+    resource function get readiness() returns http:Ok|error {
+        int _ = check self.databaseClient->countDocuments(collection, database);
+        return http:OK;
     }
 }

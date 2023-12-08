@@ -2,7 +2,7 @@ import ballerina/http;
 import ballerinax/mongodb;
 
 type Address record {|
-    string nic?;
+    int nic?;
     string address;
 |};
 
@@ -32,7 +32,7 @@ service /address on new http:Listener(9090) {
     # A resource for getting the address of a given nic
     # + nic - NIC of the person
     # + return - Address or error
-    resource function get checkAddress(string nic, string address) returns http:Ok|error {
+    resource function get checkAddress(int nic, string address) returns http:Ok|error {
         int count = check self.databaseClient->countDocuments(collection, database, {nic: nic, address: address});
         if (count == 0) {
             return error("Address not found");

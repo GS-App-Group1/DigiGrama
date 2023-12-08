@@ -1,6 +1,6 @@
 [container.image]
 repository="chathurag"
-name="DigiGrama-Address"
+name="DigiGrama-Identity"
 tag="0.1.0"
 
 [[cloud.config.files]]
@@ -23,8 +23,8 @@ memory=80
 
 [cloud.deployment.probes.liveness]
 port=9090
-path="/address/liveness"
+path="/identity/liveness"
 
 [cloud.deployment.probes.readiness]
 port=9090
-path="/address/readiness"
+path="/identity/readiness"
