@@ -5,22 +5,28 @@ info:
 paths:
   /getUserRequests/:
     get:
-      summary: Get the address of the user with nic
-      description: Get the address records from the AddressAPI database of the user
+      summary: Get the userRequets given to the system
+      description: Get the userRequets given to the system
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  _id:
-                    type: string
-                  nic:
-                    type: integer
-                  address:
-                    type: string
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                    nic:
+                      type: integer
+                    name:
+                      type: string
+                    requestTime:
+                      type: dateTime
+                    isApproved:
+                      type: boolean
 
         "404":
           description: Not found

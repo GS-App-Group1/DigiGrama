@@ -6,7 +6,6 @@ type UserRequest record {|
     string _id;
     int nic;
     string name;
-    string age;
     time:Utc requestTime;
     boolean isApproved;
 |};
@@ -31,7 +30,7 @@ service / on new http:Listener(9090) {
         self.databaseClient = check new ({connection: {url: string `mongodb+srv://${username}:${password}@digigrama.pgauwpq.mongodb.net/`}});
     }
 
-    resource function post userRequest(@http:Payload UserRequest userRequest) returns error? {
+    resource function post userRequest(UserRequest userRequest) returns error? {
         _ = check self.databaseClient->insert(userRequest, collection, database);
     }
 
