@@ -23,21 +23,15 @@ service /police\-record on new http:Listener(9090) {
         self.databaseClient = check new ({connection: {url: string `mongodb+srv://${username}:${password}@digigrama.pgauwpq.mongodb.net/`}});
     }
 
-    # A resource for getting the PoliceRecord of a person
-    # + return - PoliceRecord or error
-    resource function get .() returns PoliceRecord[]|error {
-        stream<PoliceRecord, error?>|mongodb:Error PoliceRecordStream = check self.databaseClient->find(collection, database);
-        return from PoliceRecord PoliceRecord in check PoliceRecordStream
-            select PoliceRecord;
-    }
-
     # A resource for getting the PoliceRecord of a given nic
     # + nic - NIC of the person
     # + return - PoliceRecord or error
-    resource function get getPoliceRecordFromNIC(int nic) returns PoliceRecord[]|error {
+    resource function get getPoliceRecordFromNIC(int nic) returns json|error {
         stream<PoliceRecord, error?>|mongodb:Error PoliceRecordStream = check self.databaseClient->find(collection, database);
-        return from PoliceRecord PoliceRecord in check PoliceRecordStream
+        PoliceRecord[]|error policeRecords = from PoliceRecord PoliceRecord in check PoliceRecordStream
             select PoliceRecord;
+
+        return (check policeRecords).toJson();
     }
     resource function get liveness() returns http:Ok {
         return http:OK;

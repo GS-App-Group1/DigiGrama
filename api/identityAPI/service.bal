@@ -27,16 +27,6 @@ service /identity on new http:Listener(9090) {
         self.databaseClient = check new ({connection: {url: string `mongodb+srv://${username}:${password}@digigrama.pgauwpq.mongodb.net/`}});
     }
 
-    # A resource for getting the Identity of a person
-    # + return - Identity or error
-    resource function get .() returns json|error {
-        stream<Identity, error?>|mongodb:Error IdentityStream = check self.databaseClient->find(collection, database);
-        Identity[]|error identities = from Identity Identity in check IdentityStream
-            select Identity;
-
-        return (check identities).toJson();
-    }
-
     # A resource for getting the Identity of a given nic
     # + nic - NIC of the person
     # + return - Identity or error
