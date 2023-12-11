@@ -2,6 +2,7 @@ import ballerina/http;
 import ballerinax/mongodb;
 
 type Address record {|
+    string _id;
     int nic?;
     string address;
 |};
