@@ -3,7 +3,7 @@ info:
   title: AddressAPI
   version: 1.0.0
 paths:
-  /getAddressByNIC/{nic}:
+  /getAddressByNIC/:
     get:
       summary: Get the address of the user with nic
       description: Get the address records from the AddressAPI database of the user
