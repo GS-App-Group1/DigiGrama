@@ -3,6 +3,7 @@ import ballerina/time;
 import ballerinax/mongodb;
 
 type UserRequest record {|
+    string _id;
     int nic;
     string name;
     string age;

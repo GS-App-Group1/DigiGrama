@@ -2,6 +2,7 @@ import ballerina/http;
 import ballerinax/mongodb;
 
 type PoliceRecord record {|
+    string _id;
     int nic?;
     int numberOfCrimes;
     int severity;
