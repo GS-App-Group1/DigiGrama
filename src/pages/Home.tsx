@@ -25,8 +25,6 @@ type RedirectProps = {
 const Redirect = ({ role }: RedirectProps) => {
   const navigate = useNavigate();
 
-  console.log("red", role);
-
   useEffect(() => {
     if (role === "Admin") {
       navigate("/grama-home");
@@ -82,11 +80,16 @@ const Home: React.FC = () => {
     })();
   }, [state.isAuthenticated, getBasicUserInfo, getIDToken, getDecodedIDToken]);
 
-  const payload = derivedAuthenticationState.decodedIDTokenPayload;
+  console.log(derivedAuthenticationState);
+
+  const payload = derivedAuthenticationState.authenticateResponse;
   let role = "";
+  let username = "";
   if (payload) {
     role = payload.groups.toString();
-    console.log(role);
+    if (payload.username) {
+      username = payload.username;
+    }
   }
 
   return (
@@ -104,13 +107,17 @@ const Home: React.FC = () => {
           <Route
             path="/grama-home"
             element={
-              role === "Admin" ? <GramaHomePage signOut={signOut} /> : null
+              role === "Admin" ? (
+                <GramaHomePage signOut={signOut} username={username} />
+              ) : null
             }
           />
           <Route
             path="/user-home"
             element={
-              role === "Users" ? <UserHomePage signOut={signOut} /> : null
+              role === "Users" ? (
+                <UserHomePage signOut={signOut} username={username} />
+              ) : null
             }
           />
         </Routes>

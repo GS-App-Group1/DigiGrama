@@ -24,9 +24,10 @@ import { useAuthContext } from "@asgardeo/auth-react";
 
 type UserHomePageProps = {
   signOut: () => void;
+  username: string;
 };
 
-const UserHomePage = ({ signOut }: UserHomePageProps) => {
+const UserHomePage = ({ signOut, username }: UserHomePageProps) => {
   const { getAccessToken } = useAuthContext();
 
   useEffect(() => {
@@ -103,7 +104,7 @@ const UserHomePage = ({ signOut }: UserHomePageProps) => {
           <Portal>
             <PopoverContent>
               <PopoverArrow />
-              <PopoverHeader>User</PopoverHeader>
+              <PopoverHeader>{username}</PopoverHeader>
               <PopoverBody>
                 {/* Add your user details here */}
                 <Button

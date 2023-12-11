@@ -97,9 +97,10 @@ export const requestsCompleted: MyRequest[] = [
 
 type UserHomePageProps = {
   signOut: () => void;
+  username: string;
 };
 
-const UserHomePage = ({ signOut }: UserHomePageProps) => {
+const UserHomePage = ({ signOut, username }: UserHomePageProps) => {
   const [isLargerThan768] = useMediaQuery("(min-width: 1050px)");
   const [pendingList, setPendingList] = useState<MyRequest[]>(requestsPending);
   const [completedList, setCompletedList] =
@@ -169,7 +170,7 @@ const UserHomePage = ({ signOut }: UserHomePageProps) => {
           <Portal>
             <PopoverContent>
               <PopoverArrow />
-              <PopoverHeader>User</PopoverHeader>
+              <PopoverHeader>{username}</PopoverHeader>
               <PopoverBody>
                 {/* Add your user details here */}
                 <Button
