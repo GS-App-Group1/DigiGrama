@@ -29,17 +29,14 @@ service /address on new http:Listener(9090) {
             select address;
     }
 
-    # A resource for getting the address of a given nic
-    # + nic - NIC of the person
+    # A resource for getting the address of a person
     # + return - Address or error
-    resource function get checkAddress(int nic, string address) returns http:Ok|error {
-        int count = check self.databaseClient->countDocuments(collection, database, {nic: nic, address: address});
-        if (count == 0) {
-            return error("Address not found");
-        }
-
-        return http:OK;
+    resource function get getAddressByNIC(int nic) returns Address[]|error {
+        stream<Address, error?>|mongodb:Error AddressStream = check self.databaseClient->find(collection, database, {nic: nic});
+        return from Address address in check AddressStream
+            select address;
     }
+
     resource function get liveness() returns http:Ok {
         return http:OK;
     }
