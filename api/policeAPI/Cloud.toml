@@ -4,10 +4,7 @@ name="DigiGrama-Police"
 tag="0.1.0"
 
 [[cloud.config.files]]
-file="./Configs.toml"
-
-[[cloud.config.secrets]]
-file="../config/Secrets.toml"
+file="./Config.toml"
 
 [cloud.deployment]
 min_memory="512Mi"
