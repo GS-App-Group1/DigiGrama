@@ -9,7 +9,7 @@ paths:
       description: Get the address records from the AddressAPI database of the user
       parameters:
         - name: nic
-          in: path
+          in: query
           description: nic of the user in the record
           required: true
           schema:
