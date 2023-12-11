@@ -8,8 +8,8 @@ paths:
       summary: Get the address of the user with nic
       description: Get the address records from the AddressAPI database of the user
       parameters:
-        - name: nic
-          in: query
+        - in: query
+          name: nic
           description: nic of the user in the record
           required: true
           schema:
