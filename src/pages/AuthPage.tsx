@@ -8,6 +8,7 @@ import {
   VStack,
   Stack,
   useMediaQuery,
+  Button,
 } from "@chakra-ui/react";
 import AuthenticationForm from "../components/AuthenticationForm";
 
@@ -89,7 +90,16 @@ const AuthPage = ({ signIn }: AuthPageProps) => {
           transform={scale}
           _hover={{ transform: scale }}
         >
-          <AuthenticationForm signIn={signIn} />
+          <Button
+            colorScheme="green"
+            onClick={() => signIn()}
+            fontSize="5xl"
+            padding={10}
+            borderRadius={20}
+          >
+            Sign In
+          </Button>
+          {/* <AuthenticationForm signIn={signIn} /> */}
         </Box>
       </Flex>
     </Box>

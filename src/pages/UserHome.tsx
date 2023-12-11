@@ -22,7 +22,11 @@ import UserStatus from "../components/UserStatus";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "@asgardeo/auth-react";
 
-const UserHomePage = () => {
+type UserHomePageProps = {
+  signOut: () => void;
+};
+
+const UserHomePage = ({ signOut }: UserHomePageProps) => {
   const { getAccessToken } = useAuthContext();
 
   useEffect(() => {
@@ -107,6 +111,7 @@ const UserHomePage = () => {
                   _focus={{
                     outline: "none",
                   }}
+                  onClick={signOut}
                 >
                   Logout
                 </Button>

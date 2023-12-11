@@ -30,7 +30,7 @@ const Redirect = ({ role }: RedirectProps) => {
   useEffect(() => {
     if (role === "Admin") {
       navigate("/grama-home");
-    } else if (role === "User") {
+    } else if (role === "Users") {
       navigate("/user-home");
     }
   }, [role, navigate]);
@@ -109,7 +109,9 @@ const Home: React.FC = () => {
           />
           <Route
             path="/user-home"
-            element={role === "User" ? <UserHomePage /> : null}
+            element={
+              role === "Users" ? <UserHomePage signOut={signOut} /> : null
+            }
           />
         </Routes>
       </Router>
