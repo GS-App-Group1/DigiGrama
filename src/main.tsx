@@ -5,8 +5,8 @@ import "./index.css";
 import { AuthProvider } from "@asgardeo/auth-react";
 
 const config = {
-  signInRedirectURL: "https://localhost:3000/sign-in",
-  signOutRedirectURL: "https://localhost:3000/dashboard",
+  signInRedirectURL: "http://localhost:5173/",
+  signOutRedirectURL: "http://localhost:3000/dashboard",
   clientID: "c1PygEGq7_5SIKf5t_6fzmZ1u3Aa",
   baseUrl: "https://api.asgardeo.io/t/interntest",
   scope: ["openid", "profile"],

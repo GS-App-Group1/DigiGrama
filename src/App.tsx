@@ -6,9 +6,9 @@ import GramaHome from "./pages/GramaHome";
 function App() {
   return (
     <ChakraProvider>
-      {/* <AuthPage /> */}
+      <AuthPage />
       {/* <UserHome /> */}
-      <GramaHome />
+      {/* <GramaHome /> */}
     </ChakraProvider>
   );
 }

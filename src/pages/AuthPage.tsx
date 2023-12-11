@@ -13,7 +13,6 @@ import AuthenticationForm from "../components/AuthenticationForm";
 
 const AuthPage = () => {
   const [isLargerThan768] = useMediaQuery("(min-width: 1050px)");
-
   const scale = isLargerThan768 ? "scale(0.9)" : "scale(1.5)";
   const rightMargin = isLargerThan768 ? "7%" : "0%";
 

@@ -13,6 +13,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FaFacebook, FaGoogle, FaTwitter } from "react-icons/fa";
+import { useAuthContext } from "@asgardeo/auth-react";
 
 const AuthenticationForm = () => {
   // State to track if the user is registering or logging in
