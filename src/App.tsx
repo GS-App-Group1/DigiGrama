@@ -2,11 +2,13 @@ import { ChakraProvider } from "@chakra-ui/react";
 import AuthPage from "./pages/AuthPage";
 import UserHome from "./pages/UserHome";
 import GramaHome from "./pages/GramaHome";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <ChakraProvider>
-      <AuthPage />
+      <Home />
+      {/* <AuthPage /> */}
       {/* <UserHome /> */}
       {/* <GramaHome /> */}
     </ChakraProvider>

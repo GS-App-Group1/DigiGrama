@@ -13,9 +13,12 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FaFacebook, FaGoogle, FaTwitter } from "react-icons/fa";
-import { useAuthContext } from "@asgardeo/auth-react";
 
-const AuthenticationForm = () => {
+type AuthPageProps = {
+  signIn: () => void;
+};
+
+const AuthenticationForm = ({ signIn }: AuthPageProps) => {
   // State to track if the user is registering or logging in
   const [isRegistering, setIsRegistering] = useState(false);
 
@@ -78,7 +81,7 @@ const AuthenticationForm = () => {
           <FormLabel>Password</FormLabel>
           <Input type="password" />
         </FormControl>
-        <Button colorScheme="green">
+        <Button colorScheme="green" onClick={() => signIn()}>
           {isRegistering ? "Register" : "Sign in"}
         </Button>
         {!isRegistering && (

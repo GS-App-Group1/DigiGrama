@@ -95,7 +95,11 @@ export const requestsCompleted: MyRequest[] = [
   // ... more objects can be added here
 ];
 
-const UserHomePage = () => {
+type UserHomePageProps = {
+  signOut: () => void;
+};
+
+const UserHomePage = ({ signOut }: UserHomePageProps) => {
   const [isLargerThan768] = useMediaQuery("(min-width: 1050px)");
   const [pendingList, setPendingList] = useState<MyRequest[]>(requestsPending);
   const [completedList, setCompletedList] =
@@ -173,6 +177,7 @@ const UserHomePage = () => {
                   _focus={{
                     outline: "none",
                   }}
+                  onClick={signOut}
                 >
                   Logout
                 </Button>

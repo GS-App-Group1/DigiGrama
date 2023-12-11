@@ -19,9 +19,22 @@ import {
 import { FaUser } from "react-icons/fa";
 import FormComponent from "../components/UserApply";
 import UserStatus from "../components/UserStatus";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuthContext } from "@asgardeo/auth-react";
 
 const UserHomePage = () => {
+  const { getAccessToken } = useAuthContext();
+
+  useEffect(() => {
+    getAccessToken()
+      .then((accessToken) => {
+        console.log(accessToken);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const [isLargerThan768] = useMediaQuery("(min-width: 1050px)");
   const [isApply, setIsApply] = useState(true);
   const [isStatus, setIsStatus] = useState(false);

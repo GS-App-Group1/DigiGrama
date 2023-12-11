@@ -11,7 +11,11 @@ import {
 } from "@chakra-ui/react";
 import AuthenticationForm from "../components/AuthenticationForm";
 
-const AuthPage = () => {
+type AuthPageProps = {
+  signIn: () => void;
+};
+
+const AuthPage = ({ signIn }: AuthPageProps) => {
   const [isLargerThan768] = useMediaQuery("(min-width: 1050px)");
   const scale = isLargerThan768 ? "scale(0.9)" : "scale(1.5)";
   const rightMargin = isLargerThan768 ? "7%" : "0%";
@@ -85,7 +89,7 @@ const AuthPage = () => {
           transform={scale}
           _hover={{ transform: scale }}
         >
-          <AuthenticationForm />
+          <AuthenticationForm signIn={signIn} />
         </Box>
       </Flex>
     </Box>
