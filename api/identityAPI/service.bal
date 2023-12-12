@@ -37,6 +37,14 @@ service /identity on new http:Listener(9090) {
 
         return (check identities).toJson();
     }
+
+    resource function get getGSDivisionFromNIC(string nic) returns json|error {
+        stream<Identity, error?>|mongodb:Error IdentityStream = check self.databaseClient->find(collection, database, {nic: nic});
+        Identity[]|error identities = from Identity Identity in check IdentityStream
+            select Identity;
+
+        return (check identities)[0].gsDivision.toJson();
+    }
     resource function get liveness() returns http:Ok {
         return http:OK;
     }
