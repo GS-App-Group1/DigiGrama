@@ -1,0 +1,8 @@
+# +required List of endpoints to create
+endpoints:
+  - name: smsAPI
+    port: 9090
+    type: REST
+    networkVisibility: Public
+    context: /sms
+    schemaFilePath: openAPI.yaml

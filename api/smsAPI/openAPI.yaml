@@ -1,0 +1,59 @@
+openapi: "3.0.0"
+info:
+  title: SmsAPI
+  version: 1.0.0
+paths:
+  /notify/:
+    get:
+      summary: Send SMS Notifications to users
+      description: Takes input reciever phone number and the message to be sent and send s the message.
+      parameters:
+        - in: query
+          name: toMobile
+          description: phone number of the reciever
+          required: true
+          schema:
+            type: string
+
+        - in: query
+          name: message
+          description: message to be sent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  nic:
+                    type: integer
+                  address:
+                    type: string
+
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  description:
+                    type: string
+
+        "500":
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+
+      deprecated: false
+      security: []
