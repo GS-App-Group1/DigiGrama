@@ -80,13 +80,15 @@ const Home: React.FC = () => {
     })();
   }, [state.isAuthenticated, getBasicUserInfo, getIDToken, getDecodedIDToken]);
 
-  console.log(derivedAuthenticationState);
-
   const payload = derivedAuthenticationState.authenticateResponse;
   let role = "";
   let username = "";
   if (payload) {
-    role = payload.groups.toString();
+    if (payload.groups) {
+      role = payload.groups.toString();
+    } else {
+      role = "Users";
+    }
     if (payload.username) {
       username = payload.username;
     }
