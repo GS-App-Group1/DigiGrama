@@ -1,12 +1,11 @@
 import ballerina/http;
-import ballerina/time;
 import ballerinax/mongodb;
 
 type UserRequest record {|
     string _id;
-    int nic;
+    string nic;
     string name;
-    time:Utc requestTime;
+    string requestTime;
     boolean isApproved;
 |};
 

@@ -3,7 +3,7 @@ import ballerinax/mongodb;
 
 type Identity record {|
     string _id;
-    int nic?;
+    string nic?;
     string name;
     string dob;
     string phoneNumber;
@@ -30,7 +30,7 @@ service /identity on new http:Listener(9090) {
     # A resource for getting the Identity of a given nic
     # + nic - NIC of the person
     # + return - Identity or error
-    resource function get getIdentityFromNIC(int nic) returns json|error {
+    resource function get getIdentityFromNIC(string nic) returns json|error {
         stream<Identity, error?>|mongodb:Error IdentityStream = check self.databaseClient->find(collection, database, {nic: nic});
         Identity[]|error identities = from Identity Identity in check IdentityStream
             select Identity;
