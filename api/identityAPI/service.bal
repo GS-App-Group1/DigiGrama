@@ -7,6 +7,7 @@ type Identity record {|
     string name;
     string dob;
     string phoneNumber;
+    string gsDivision;
     boolean isMarried;
     boolean isEmployed;
 |};
