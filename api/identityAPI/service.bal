@@ -1,12 +1,11 @@
 import ballerina/http;
-import ballerina/time;
 import ballerinax/mongodb;
 
 type Identity record {|
     string _id;
     int nic?;
     string name;
-    time:Date dob;
+    string dob;
     string phoneNumber;
     boolean isMarried;
     boolean isEmployed;
