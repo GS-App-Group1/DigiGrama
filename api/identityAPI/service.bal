@@ -1,13 +1,13 @@
 import ballerina/http;
-import ballerina/time;
 import ballerinax/mongodb;
 
 type Identity record {|
     string _id;
-    int nic?;
+    string nic?;
     string name;
-    time:Date dob;
+    string dob;
     string phoneNumber;
+    string gsDivision;
     boolean isMarried;
     boolean isEmployed;
 |};
@@ -30,12 +30,20 @@ service /identity on new http:Listener(9090) {
     # A resource for getting the Identity of a given nic
     # + nic - NIC of the person
     # + return - Identity or error
-    resource function get getIdentityFromNIC(int nic) returns json|error {
+    resource function get getIdentityFromNIC(string nic) returns json|error {
         stream<Identity, error?>|mongodb:Error IdentityStream = check self.databaseClient->find(collection, database, {nic: nic});
         Identity[]|error identities = from Identity Identity in check IdentityStream
             select Identity;
 
         return (check identities).toJson();
+    }
+
+    resource function get getGSDivisionFromNIC(string nic) returns json|error {
+        stream<Identity, error?>|mongodb:Error IdentityStream = check self.databaseClient->find(collection, database, {nic: nic});
+        Identity[]|error identities = from Identity Identity in check IdentityStream
+            select Identity;
+
+        return (check identities)[0].gsDivision.toJson();
     }
     resource function get liveness() returns http:Ok {
         return http:OK;

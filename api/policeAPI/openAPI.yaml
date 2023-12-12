@@ -13,7 +13,7 @@ paths:
           description: nic of the user in the record
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         "200":
           description: OK
