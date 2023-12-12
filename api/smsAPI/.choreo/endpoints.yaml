@@ -1,6 +1,6 @@
 # +required List of endpoints to create
 endpoints:
-  - name: smsAPI
+  - name: SMS_API
     port: 9090
     type: REST
     networkVisibility: Public

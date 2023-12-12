@@ -9,7 +9,7 @@ configurable string authToken = ?;
 
 
 service /sms on new http:Listener(9090) {
-    resource function get notify(string toMobile,string message) returns error?{
+    resource function post notify(string toMobile,string message) returns error?{
          //Twilio Client configuration
     twilio:ConnectionConfig twilioConfig = {
         twilioAuth: {

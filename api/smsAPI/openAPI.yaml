@@ -4,7 +4,7 @@ info:
   version: 1.0.0
 paths:
   /notify/:
-    get:
+    post:
       summary: Send SMS Notifications to users
       description: Takes input reciever phone number and the message to be sent and send s the message.
       parameters:
