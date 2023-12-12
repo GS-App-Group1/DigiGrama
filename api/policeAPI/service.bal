@@ -3,7 +3,7 @@ import ballerinax/mongodb;
 
 type PoliceRecord record {|
     string _id;
-    int nic?;
+    string nic?;
     int numberOfCrimes;
     int severity;
 |};
@@ -26,7 +26,7 @@ service /police\-record on new http:Listener(9090) {
     # A resource for getting the PoliceRecord of a given nic
     # + nic - NIC of the person
     # + return - PoliceRecord or error
-    resource function get getPoliceRecordFromNIC(int nic) returns json|error {
+    resource function get getPoliceRecordFromNIC(string nic) returns json|error {
         stream<PoliceRecord, error?>|mongodb:Error PoliceRecordStream = check self.databaseClient->find(collection, database);
         PoliceRecord[]|error policeRecords = from PoliceRecord PoliceRecord in check PoliceRecordStream
             select PoliceRecord;
